@@ -14,7 +14,7 @@ export default function FirstScreen() {
       <Text style={styles.title}>Menú Principal</Text>
       
       <Pressable style={styles.button} onPress={() => router.navigate('/students/new')}>
-        <Text style={styles.buttonText}>Registrar estudiante</Text>
+        <Text style={styles.buttonText}>Registrar Estudiante</Text>
       </Pressable>
 
       {/* <Pressable style={styles.button} onPress={() => router.navigate('/students')}>
@@ -26,7 +26,7 @@ export default function FirstScreen() {
       </Pressable> */}
 
       <Pressable style={styles.button} onPress={() => router.navigate('/attendance')}>
-        <Text style={styles.buttonText}>Ver listas de asistencias</Text>
+        <Text style={styles.buttonText}>Ver Listas de Asistencias</Text>
       </Pressable>
     
     </ImageBackground>
@@ -53,7 +53,7 @@ const styles = StyleSheet.create({
     color: "#fff",
   },
   button: {
-    backgroundColor: "#ffffffaa",
+    backgroundColor: "#eee",
     paddingVertical: 12,
     paddingHorizontal: 12,
     borderRadius: 4,
@@ -63,7 +63,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   buttonText: {
-    color: "#333",
+    color: "#222",
     fontSize: 16,
     fontWeight: "600",
   },
