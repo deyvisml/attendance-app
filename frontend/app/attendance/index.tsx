@@ -26,7 +26,7 @@ export default function Lists() {
   const insets = useSafeAreaInsets()
 
   const [showCreate, setShowCreate] = useState(false);
-  const [formName, setFormName] = useState('');
+  const [formName, setFormName] = useState(getDefaultListName());
   const [creating, setCreating] = useState(false);
 
   const [page, setPage] = useState(1);
@@ -205,7 +205,12 @@ export default function Lists() {
             onPress={() => router.navigate({ pathname: '/attendance/[id]/registered', params: { id: String(item.id), name: item.name } })}
           >
             <View style={{ padding: 10, borderBottomWidth: 1, borderColor: '#eee' }}>
-              <Text style={{ fontWeight: '600' }}>{item.id} : {item.name}</Text>
+              <Text style={{ fontSize: 16 }}>{item.id} : {item.name}</Text>
+              <Text style={{ color: '#666'  , textAlign: 'right', marginTop: 8, fontSize: 12 }}>{new Date(item.date).toLocaleString([], { 
+                  dateStyle: 'short', 
+                  timeStyle: 'short' 
+                })}
+              </Text>
             </View>
           </Pressable>
         )}
@@ -238,10 +243,6 @@ export default function Lists() {
          <View style={s.modalBackdrop}>
            <KeyboardAvoidingView behavior={Platform.select({ ios: 'padding', android: undefined })} style={s.modalCard}>
              <Text style={s.modalTitle}>Nueva lista</Text>
-             <Text style={s.modalHint}>
-               Si dejas el nombre vacío, usaremos:{"\n"}
-               <Text style={{ fontStyle: 'italic' }}>{getDefaultListName()}</Text>
-             </Text>
 
              <TextInput
                placeholder="Nombre de la lista"
@@ -340,6 +341,7 @@ const s = StyleSheet.create({
      paddingHorizontal: 12,
      paddingVertical: 10,
      marginBottom: 12,
+     marginTop: 10,
    },
    modalRow: { flexDirection: 'row', gap: 8 },
    modalBtn: {
