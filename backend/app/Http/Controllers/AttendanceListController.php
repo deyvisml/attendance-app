@@ -124,7 +124,7 @@ class AttendanceListController extends Controller
 
         $attendances = $attendanceList->attendances()->orderBy('datetime', 'desc')->get();
 
-        $file_name = 'Asistencia_' . $attendanceList->created_at->format('Y-m-d') . '.xlsx';
+        $file_name = $attendanceList->name . '.xlsx';
 
         return Excel::download(new AttendancesExport($attendances), $file_name);
     }
