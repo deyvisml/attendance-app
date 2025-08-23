@@ -27,6 +27,8 @@ class AttendanceListController extends Controller
 
     public function getRegisteredStudents($attendance_list_id)
     {
+        $RECORDS_PER_PAGE = 15;
+
         $validation_rules = [
             'attendance_list_id' => 'required|integer|exists:attendance_lists,id'
         ];
@@ -47,15 +49,10 @@ class AttendanceListController extends Controller
 
         $attendanceList = AttendanceList::find($attendance_list_id);
 
-        $attendances = $attendanceList->attendances()->orderBy('datetime', 'desc')->get();
+        $attendances = $attendanceList->attendances()->orderBy('datetime', 'desc')
+            ->simplePaginate($RECORDS_PER_PAGE);
 
-        $response = [
-            'status' => true,
-            'message' => "Lista de asistencia obtenida exitosamente.",
-            'data' => AttendanceResource::collection($attendances),
-        ];
-
-        return response()->json($response, 200);
+        return AttendanceResource::collection($attendances);
     }
 
     /**
@@ -78,7 +75,7 @@ class AttendanceListController extends Controller
                     'data' => $validation->errors(),
                 ],
             ];
-            return response()->json($response);
+            return response()->json($response, 422);
         }
 
         $attendance_list = AttendanceList::create($request->all());

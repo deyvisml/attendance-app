@@ -48,7 +48,7 @@ class UserGradeController extends Controller
                     'data' => $validation->errors(),
                 ],
             ];
-            return response()->json($response, 200);
+            return response()->json($response, 422);
         }
 
         // get grade_id
